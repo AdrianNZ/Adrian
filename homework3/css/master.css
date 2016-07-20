@@ -1,0 +1,92 @@
+.no-margin {
+    margin: 0px !important;
+}
+.no-padding {
+    padding: 0px !important;
+}
+body a {
+    text-decoration: none;
+}
+.boxed {
+    max-width: 700px;
+    display: block;
+    background-color: #676767;
+    position: relative;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 0 20px 4px
+}
+.nab h2 {
+    color: white;
+    padding: 0px;
+    margin: 0px;
+}
+.nab ul {
+    text-align: right;
+    padding-top: 10px;
+}
+.nab ul li {
+    display: inline;
+    list-style: none;
+}
+.monitor span a i {
+    color: white;
+}
+.monitor input {
+    background-color: inherit;
+    min-height: 100px;
+    width: 100%;
+    border: none;
+    text-align: right;
+    padding-right: 10px;
+    font-size: 70px;
+    color: white;
+}
+.function input {
+    color: white;
+    margin: 0px;
+    text-align: center;
+    background-color: inherit;
+    width: 100%;
+    border: none;
+    font-size: 30px;
+}
+@media (max-width: 992px) {
+    .function input {
+        font-size: 30px;
+        padding: 10px;
+    }
+}
+@media (max-width: 500px) {
+    .function input {
+        font-size: 20px;
+        padding: 5px;
+    }
+}
+.symbol {
+    border-top: 1px solid gray;
+}
+.symbol input {
+    color: white;
+    padding: 20px;
+    margin: 0px;
+    text-align: center;
+    background-color: inherit;
+    width: 100%;
+    border: none;
+    font-size: 30px;
+}
+.input1, .input2, .input3, .input4, .input5 {
+    background-color: #4e4c4c;
+}
+.input1 input, .input2 input, .input3 input, .input4 input, .input5 input {
+    color: white;
+    padding: 20px;
+    margin: 0px;
+    text-align: center;
+    background-color: inherit;
+    width: 100%;
+    border: none;
+    font-size: 35px;
+}
