@@ -24,6 +24,22 @@
             }
             calculator.monitor.value = calculator.monitor.value + v1;
         } // 버튼을 누르면 누르는 값이 모니터 인풋에 벨류값을 변경 하는 함수
+
+        /**
+        * setResult : 결과값을 제어하는 함수
+        * @param: int
+        * @author: Gabriel
+        */
+        function setResult(result){
+            var value = result.toString(); // 숫자를 문자열로 케스팅
+            var strLength = value.length; // 문자열 길이를 받아옴
+
+            // 문자열 길이가 10자리보다 길때 substr로 뒤에서부터 10자리를 잘라서 대입
+            if(strLength > 10) value = value.substr(strLength - 10, strLength); 
+
+            //해당 값을 리턴함.
+            return Number(value);
+        }
     </script>
 
 </head>
@@ -51,10 +67,7 @@
             </div>
         </div>
         <div class="no-margin no-padding">
-
             <form class="" action="index.html" method="post" name="calculator">
-
-
                 <div class="container-fluid">
                     <div class="row monitor">
                         <div class="col-xs-12 form-group">
@@ -172,7 +185,7 @@
                             <input type="button" name="btndot" value="." onclick="displaybtn(btndot.value)">
                         </div>
                         <div class="col-xs-3">
-                            <input type="button" name="btnequal" value="=" onclick="monitor.value=eval(monitor.value).toFixed(5)">
+                            <input type="button" name="btnequal" value="=" onclick="monitor.value= setResult( eval(monitor.value) )" maxlength="10">
                             <!-- 누르면 모니터인풋에 있는 값을 전부 계산, 소수점 이하 6자리는 반올림-->
                         </div>
                     </div>
