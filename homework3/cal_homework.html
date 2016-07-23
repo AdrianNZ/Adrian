@@ -17,6 +17,11 @@
         'use strict'
 
         function displaybtn(v1) {
+            if( calculator.monitor.value == 0 ) {
+                if(!isNaN(v1)){//입력시 숫자인지 문자인지 구분
+                    calculator.monitor.value = "";//입력시 앞에 값이 0인지 아닌지 구분.    
+                }                
+            }
             calculator.monitor.value = calculator.monitor.value + v1;
         } // 버튼을 누르면 누르는 값이 모니터 인풋에 벨류값을 변경 하는 함수
     </script>
@@ -95,7 +100,7 @@
 
                     <div class="row input1">
                         <div class="col-xs-3">
-                            <input type="button" name="resetbtn" value="CE" onclick="calculator.monitor.value=' '">
+                            <input type="button" name="resetbtn" value="CE" onclick="calculator.monitor.value='0'">
                             <!-- 누르면 모니터인풋에 ' '을 입력-->
 
                         </div>
