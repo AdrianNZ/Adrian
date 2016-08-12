@@ -1,0 +1,26 @@
+.outline {
+    border: 3px solid black;
+    font-size: 20px;
+}
+.header {
+    border: 3px solid red;
+    height: 100px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.body {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.child1, .child2, .child3 {
+    border: 3px solid yellow;
+    height: 100px;
+    width: 80%;
+    margin: 10px auto;
+}
+.footer {
+    border: 3px solid green;
+    height: 100px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

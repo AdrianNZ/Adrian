@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/*
+.custom_form {
+    display: none;
+}
+*/
+
+#form_login {
+    width: 500px;
+    margin: 15% auto;
+}
+#form_signup {
+    width: 500px;
+    margin: 15% auto;
+}
