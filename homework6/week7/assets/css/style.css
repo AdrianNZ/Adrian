@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'arial';
+}
+#login #form_login, #form_signup {
+    position: relative;
+    margin: 15% auto;
+    width: 500px;
+}
+#confirmed_form, #failed_form {
+    display: none;
+}
+#message_box .alert {
+    display: none;
+}
+.tr-temp {
+    display: none;
+}

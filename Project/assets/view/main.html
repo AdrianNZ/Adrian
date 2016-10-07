@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>NodeJS Project Main</title>
+
+    <link href="../js/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/master.css" media="screen" title="no title">
+
+    <script src="../js/jQuery-1.12.4/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="../js/main.js">
+    </script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">MY</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="loggedin"></span>
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" data-toggle="modal" data-target="#myModal2" id="infosearch">사용자 정보</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/logout" id="logout">Log out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+
+    <h1>Address Book</h1>
+    <button type="button" class="btn btn-success pull-right insert" data-toggle="modal" data-target="#myModal3">Insert</button>
+    <br />
+    <section>
+        <div class="data_section">
+            <table class="table table-hover" id="info-table">
+                <thead>
+                    <tr>
+                        <td class="col-sm-2 text-center">NAME</td>
+                        <td class="col-sm-2 text-center">E-MAIL</td>
+                        <td class="col-sm-2 text-center">Phone</td>
+                        <td class="col-sm-2 text-center">Address</td>
+                        <td class="col-sm-2 text-center">Date of Birth</td>
+                        <td class="col-sm-1 text-center">
+                            Edit
+                        </td>
+                        <td class="col-sm-1 text-center">
+                            Delete
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="template">
+                        <td class="col-sm-2 text-center" id="name">NAME</td>
+                        <td class="col-sm-2 text-center" id="email">E-MAIL</td>
+                        <td class="col-sm-2 text-center" id="phone">Phone</td>
+                        <td class="col-sm-2 text-center" id="address">Address</td>
+                        <td class="col-sm-2 text-center" id="dob">Date of Birth</td>
+                        <td class="col-sm-1 text-center" id="edit">
+                            <button data-toggle="modal" data-target="#myModal1" class="edit">Edit</button>
+                        </td>
+                        <td class="col-sm-1 text-center" id="del">
+                            <a href="/delete">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
+    <!-- <section>
+        <input type="hidden" class="form-control" name="id">
+        <input type="text" class="form-control" name="name" id="updateName" placeholder="Name">
+        <input type="text" class="form-control" name="email" id="updateEmail" placeholder="Email">
+        <input type="text" class="form-control" name="phone" id="updatePhone" placeholder="Phone">
+        <input type="text" class="form-control" name="address" id="updateAddress" placeholder="Address">
+        <input type="text" class="form-control" name="dob" id="updatedob" placeholder="Date of Birth">
+    </section> -->
+
+    <!-- Modal 1-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel1">주소록 정보</h4>
+                </div>
+                <div class="modal-body">
+
+                    <input type="hidden" class="form-control" name="id">
+
+                    <div class="form-group">
+                        <label for="updateName">Name</label>
+                        <input type="text" class="form-control" name="name" id="updateName" placeholder="Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="updateEmail">Email</label>
+                        <input type="text" class="form-control" name="email" id="updateEmail" placeholder="Email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="updatePhone">Phone</label>
+                        <input type="text" class="form-control" name="phone" id="updatePhone" placeholder="Phone">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="updateAddress">Address</label>
+                        <input type="text" class="form-control" name="address" id="updateAddress" placeholder="Address">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="updatedob">Date of Birth</label>
+                        <input type="text" class="form-control" name="dob" id="updatedob" placeholder="Date of Birth">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btn_update_data">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2-->
+    <!-- <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">사용자 정보</h4>
+                </div>
+                <div class="modal-body">
+
+                    <input type="hidden" class="form-control" name="id" id="infoid">
+
+                    <div class="form-group">
+                        <label for="infoEmail">Email</label>
+                        <input type="text" class="form-control" name="email" id="infoEmail" placeholder="Email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="infopassword">Password</label>
+                        <input type="text" class="form-control" name="password" id="infopassword" placeholder="Password">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btn_update_data">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- Modal 3-->
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel3">주소록 삽입</h4>
+                </div>
+                <div class="modal-body">
+
+                    <input type="hidden" class="form-control" name="id" value="">
+
+                    <div class="form-group">
+                        <label for="insertName">Name</label>
+                        <input type="text" class="form-control" name="name" id="insertName" placeholder="Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="insertEmail">Email</label>
+                        <input type="text" class="form-control" name="email" id="insertEmail" placeholder="Email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="insertPhone">Phone</label>
+                        <input type="text" class="form-control" name="phone" id="insertPhone" placeholder="Phone">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="insertAddress">Address</label>
+                        <input type="text" class="form-control" name="address" id="insertAddress" placeholder="Address">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="insertdob">Date of Birth</label>
+                        <input type="text" class="form-control" name="dob" id="insertdob" placeholder="Date of Birth">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btn_send_data">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(main.init)
+    </script>
+
+    <script src="../js/jQuery-1.12.4/jquery-1.12.4.min.js"></script>
+    <script src="../js/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

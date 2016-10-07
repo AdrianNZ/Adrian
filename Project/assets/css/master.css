@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'arial';
+}
+
+#form_login {
+    position: relative;
+    margin: 15% auto;
+    width: 500px;
+}
+
+#form_signup {
+    position: relative;
+    margin: 15% auto;
+    width: 500px;
+}
+
+.data_section {
+    margin-top: 30px;
+}
+
+#info-table td {
+    border: solid black 1px;
+}
+
+.template {
+    display: none;
+}
+
+.logout {
+    cursor: pointer;
+}
