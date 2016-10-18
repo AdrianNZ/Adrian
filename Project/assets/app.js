@@ -15,9 +15,9 @@ var generic_pool = require('generic-pool');
 //==============================================
 
 var db = mysql.createConnection({
-  user:'root',
-  password:'123456',
-  port:3306
+    user: 'root',
+    password: '123456',
+    port: 3306
 });
 
 db.query('USE tasman_project');
@@ -32,25 +32,33 @@ var app = express();
 //==============================================
 
 // cross-access hack.
-app.use(function(req, res, next){
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-type, Authorization');
-  next();
+app.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-type, Authorization');
+    next();
 });
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 app.use(express.static(path.join(__dirname)));
 app.use(cookieParser());
-app.use(sessions({secret:'qbweo@ras$%&@$nfwtgf', resave:false, saveUninitialized:true}));
+
+// session setting
+app.use(sessions({
+    secret: 'qbweo@ras$%&@$nfwtgf',
+    resave: false,
+    saveUninitialized: true
+}));
 
 
 // * 서버가동 *
 
-app.listen(8004, function(){
-  console.log("Server is running localhost:8004....");
+app.listen(8004, function() {
+    console.log("Server is running localhost:8004....");
 });
 
 
@@ -62,202 +70,258 @@ app.listen(8004, function(){
 
 // 로그인처리
 
-// 화면에 들어가면 index파일을 읽어들임
-app.get('/index', function(request, response){
-  session = request.session;
-  if(session.uniqueId){
-    response.redirect('/');
-}
-  fs.readFile('view/index.html', 'utf-8', function(err, data){
-      response.status(200).send(ejs.render(data, {data:data}));
-  });
+// index주소를 받으면 뷰폴더에서 index.html을 보여줌
+app.get('/index', function(request, response) {
+    session = request.session;
+    if (session.uniqueId) {
+        response.redirect('/');
+    }
+    fs.readFile('view/index.html', 'utf-8', function(err, data) {
+        response.status(200).send(ejs.render(data, {
+            data: data
+        }));
+    });
 });
 
 
 // 로그인에 성공하면 main주소를 받아서 main.html로 접근
-app.get('/main', function(request, response){
-  session = request.session;
-  if(session.uniqueId){
-    fs.readFile('view/main.html', 'utf-8', function(err, data){
-      response.status(200).send(ejs.render(data, {data:data}));
-    });
-  } else {
-    response.redirect('/');
-}
+app.get('/main', function(request, response) {
+    session = request.session;
+    if (session.uniqueId) {
+        fs.readFile('view/main.html', 'utf-8', function(err, data) {
+            response.status(200).send(ejs.render(data, {
+                data: data
+            }));
+        });
+    } else {
+        response.redirect('/');
+    }
 });
 
 // 로그인 버튼을 누르면 실행
-app.post('/post/logincheck', function(request, response){
+app.post('/post/logincheck', function(request, response) {
 
-session = request.session;
-if(session.uniqueId){
-  response.redirect('/');
-}
+    session = request.session;
+    if (session.uniqueId) {
+        response.redirect('/');
+    }
 
-var strSql = "SELECT id, email, password FROM logintb WHERE email = ? AND password = ?";
+    var strSql = "SELECT id, email, password FROM logintb WHERE email = ? AND password = ?";
 
-var data = {
-  email: request.body.email,
-  password: request.body.password
-};
-
-
-db.query(strSql, [data.email, data.password], function(error, rows){
-
-if(error) return response.status(500).json({error:error});
+    var data = {
+        email: request.body.email,
+        password: request.body.password
+    };
 
 
-    if(error){
-      console.log(err);
-      return response.status(200).send();
+    db.query(strSql, [data.email, data.password], function(error, rows) {
 
-    } else if(!rows[0]){
-      response.redirect('/index');
+        if (error) return response.status(500).json({
+            error: error
+        });
 
-    } else{
-      session.uniqueId = rows[0].id;
-      response.redirect('/');
-  }
+
+        if (error) {
+            console.log(err);
+            return response.status(200).send();
+
+        } else if (!rows[0]) {
+            response.redirect('/index');
+
+        } else {
+            //세션에 아이디와 이메일 패스워드를 담음
+            session.uniqueId = rows[0].id;
+            session.uniqueemail = rows[0].email;
+            session.uniquepwd = rows[0].password;
+            response.redirect('/');
+        }
+    });
+
 });
 
+
+//signup 실행
+
+app.post('/post/join', function(request, response) {
+    var strSql = "INSERT INTO logintb (email, password) VALUES(?,?)";
+
+    db.query(strSql, [request.body.email, request.body.password], function(error, results) {
+
+        if (error) return response.status(500).json({
+            error: error
+        });
+
+        if (error) {
+            console.log(err);
+            return response.status(200).send();
+        } else {
+            response.redirect('/');
+        }
+    });
 });
 
+// signin link 누르면 이동
+app.get('/doSignin/', function(request, response) {
+    fs.readFile('view/index.html', 'utf-8', function(err, data) {
+        response.status(200).send(ejs.render(data, {
+            data: data
+        }));
+    });
+});
+
+//signup link 누르면 이동
+app.get('/doSignup/', function(request, response) {
+    fs.readFile('view/signup.html', 'utf-8', function(err, data) {
+        response.status(200).send(ejs.render(data, {
+            data: data
+        }));
+    });
+});
 
 // localhost:8004에 접속하면 세션이 있는지 확인하고 있으면 main페이지로 바로보내고 없으면 index로 보내는...
 
-app.get('/', function(request, response){
-  session = request.session;
+app.get('/', function(request, response) {
+    session = request.session;
 
-  if(session.uniqueId){
-    response.redirect('/main');
-  } else{
-    response.redirect('/index');
-  }
+    if (session.uniqueId) {
+        response.redirect('/main');
+    } else {
+        response.redirect('/index');
+    }
 });
 //
 
-// 로그아웃 처리
+// 로그아웃 처리 (세션도 파괴)
 
-app.get('/logout', function(request, response, next){
-  request.session.destroy(function(error){
-    response.redirect('/');
-  });
+app.get('/logout', function(request, response, next) {
+    request.session.destroy(function(error) {
+        response.redirect('/');
+    });
 });
 
-//
 
+
+
+
+// 로그인한 사람 정보 세션에 담아서 보내기
+app.get('/get/logged', function(request, response) {
+
+    session = request.session;
+    response.status(200).json(session);
+
+});
+
+
+// 로그인한 사람 패스워드 수정
+app.post('/post/logged', function(request, response) {
+    var strSql = "UPDATE logintb SET password = ? WHERE id = ?";
+
+    db.query(strSql, [request.body.password, request.body.id], function(error, results) {
+
+        if (error) return response.status(500).json({
+            error: error
+        });
+
+        var param = {
+            password: request.body.password
+        };
+
+        session.uniquepwd = param.password;
+
+        console.log(session);
+        response.status(200).json(session);
+
+    });
+});
 
 // main 페이지에 들어가면 db에 있는 사람 전부 불러오는
-app.get('/get/user', function(request, response){
+app.get('/get/user', function(request, response) {
 
-var strSql = "SELECT id, email, name, phone, address, dob, status FROM adbook WHERE status = 'active'";
+    var strSql = "SELECT id, email, name, phone, address, dob, status FROM adbook WHERE status = 'active'";
 
-db.query(strSql, null, function(error, data){
+    db.query(strSql, null, function(error, data) {
 
 
-    if(error) return response.status(500).json({error:error});
+        if (error) return response.status(500).json({
+            error: error
+        });
 
-    response.status(200).json(data);
 
-});
+        response.status(200).json(data);
+
+    });
 
 });
 
 
 // 주소록에서 정보를 입력하면 보내는
 
-app.post('/post/user', function(request, response){
-  var strSql = "INSERT INTO adbook (email, name, phone, address, dob, status) VALUES(?,?,?,?,?,'active')";
+app.post('/post/user', function(request, response) {
+    var strSql = "INSERT INTO adbook (email, name, phone, address, dob, status) VALUES(?,?,?,?,?,'active')";
 
-  db.query(strSql, [request.body.email, request.body.name, request.body.phone, request.body.address, request.body.dob], function(error, results){
+    db.query(strSql, [request.body.email, request.body.name, request.body.phone, request.body.address, request.body.dob], function(error, results) {
 
-    if(error) return response.status(500).json({error:error});
+        if (error) return response.status(500).json({
+            error: error
+        });
 
-    var param = {
-                email:request.body.email,
-                name:request.body.name,
-                phone:request.body.phone,
-                address:request.body.address,
-                dob:request.body.dob,
-                id:results.insertId};
+        var param = {
+            email: request.body.email,
+            name: request.body.name,
+            phone: request.body.phone,
+            address: request.body.address,
+            dob: request.body.dob,
+            id: results.insertId
+        };
 
-    response.status(200).json(param);
+        response.status(200).json(param);
 
-  });
+    });
 });
 
 
 
 // 주소록 정보를 수정하면 보내는
 
-app.post('/update/user', function(request, response){
-  var strSql = "UPDATE adbook SET email = ?, name = ?, phone = ?, address = ?, dob = ? WHERE id = ?";
+app.post('/update/user', function(request, response) {
+    var strSql = "UPDATE adbook SET email = ?, name = ?, phone = ?, address = ?, dob = ? WHERE id = ?";
 
-  db.query(strSql, [request.body.email, request.body.name, request.body.phone, request.body.address, request.body.dob, request.body.id], function(error, results){
+    db.query(strSql, [request.body.email, request.body.name, request.body.phone, request.body.address, request.body.dob, request.body.id], function(error, results) {
 
-    if(error) return response.status(500).json({error:error});
+        if (error) return response.status(500).json({
+            error: error
+        });
 
-    var param = {
-                email:request.body.email,
-                name:request.body.name,
-                phone:request.body.phone,
-                address:request.body.address,
-                dob:request.body.dob,
-                id:request.body.id};
+        var param = {
+            email: request.body.email,
+            name: request.body.name,
+            phone: request.body.phone,
+            address: request.body.address,
+            dob: request.body.dob,
+            id: request.body.id
+        };
 
-    response.status(200).json(param);
+        response.status(200).json(param);
 
-  });
+    });
 });
 
 // 삭제시 실행
 
-app.get('/delete/:id', function(request, response){
-  var strSql = "UPDATE adbook SET status='inactive' WHERE id = ?";
+app.get('/delete/:id', function(request, response) {
+    var strSql = "UPDATE adbook SET status='inactive' WHERE id = ?";
 
-  db.query(strSql, [request.params.id], function(error, results){
+    db.query(strSql, [request.params.id], function(error, results) {
 
-    if(error) return response.status(500).json({error:error});
+        if (error) return response.status(500).json({
+            error: error
+        });
 
-    var param = {id:request.params.id};
+        var param = {
+            id: request.params.id
+        };
 
-    response.redirect('/');
+        response.redirect('/');
 
-  });
+    });
 });
-
-// // 사용자 정보 조회
-// app.get('/get/info', function(request, response){
-//
-// session = request.session;
-//
-// var strSql = "SELECT id, email, password FROM logintb WHERE id = ?";
-//
-// db.query(strSql, [session.uniqueId], function(error, results){
-//
-//   if(error) return response.status(500).json({error:error});
-//
-//   response.status(200).json(data);
-//
-// });
-//
-// });
-//
-// // 사용자 정보 수정
-//
-// app.post('/info/update', function(request, response){
-//   var strSql = "UPDATE logintb SET email = ?, password = ? WHERE id = ?";
-//
-//   db.query(strSql, [request.body.email, request.body.password, request.body.id], function(error, results){
-//
-//     if(error) return response.status(500).json({error:error});
-//
-//     var param = {
-//                 email:request.body.email,
-//                 password:request.body.password,
-//                 id:request.body.id};
-//
-//     response.status(200).json(param);
-//     response.redirect('/');
-//   });
-// });
