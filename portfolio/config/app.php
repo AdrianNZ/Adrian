@@ -178,8 +178,11 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Barryvdh\Debugbar\ServiceProvider::class,
-        Mews\Purifier\PurifierServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class
+//        Mews\Purifier\PurifierServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+
+        // ext lib by Adrian 2017.03.22
+        AlfredoRamos\ParsedownExtra\ParsedownExtraServiceProvider::class,
 
     ],
 
@@ -229,8 +232,12 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Purifier' => Mews\Purifier\Facades\Purifier::class,
-        'Image' => Intervention\Image\Facades\Image::class
+//        'Purifier' => Mews\Purifier\Facades\Purifier::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+
+        // ext lib by Adrian 2017.03.22
+        'Markdown'  => AlfredoRamos\ParsedownExtra\Facades\ParsedownExtra::class,
+
     ],
     'imageRoot'=>[
         'src'=>'upload/img/',

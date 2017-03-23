@@ -15,7 +15,7 @@
             </div>
 
             <div class="col-sm-6 right-col">
-                <h2>Who Am I?</h2>
+                <h2><a href="{{url('docs/hello.md')}}">Who Am I?</a></h2>
                 <p>I am an enthusiast who enjoys online digital and offline world. I make high quality graphics and
                     clean html5 and css3 codes.</p>
             </div>

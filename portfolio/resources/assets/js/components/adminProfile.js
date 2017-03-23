@@ -28,14 +28,17 @@ var adminProfile = {
             success: function (response) {
                 if (response.success == 1) {
                     $('.admin_dashboard').html(response.data.html);
+                    $('#messages').removeClass('hidden');
                 }
                 if (response.success == 0) {
                     $('#error-msg').html(response.data.html);
+                    $('#messages').addClass('hidden');
                 }
             },
             error: function (response) {
                 if (response.success == 0) {
                     $('#error-msg').html(response.data.html);
+                    $('#messages').addClass('hidden');
                 }
             }
         })

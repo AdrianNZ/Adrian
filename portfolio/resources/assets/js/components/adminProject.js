@@ -26,6 +26,7 @@ var adminProject = {
         //         $('.admin_dashboard').html(response.data.html);
         //     }
         // });
+
         $.ajax({
             url: url,
             method: 'POST',
@@ -66,6 +67,7 @@ var adminProject = {
         //         $('.admin_dashboard').html(response.data.html);
         //     }
         // });
+
         $.ajax({
             url: url,
             method: 'POST',

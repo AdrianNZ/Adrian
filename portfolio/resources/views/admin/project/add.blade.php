@@ -28,7 +28,7 @@
             <label for="project_desc" class="col-sm-3 control-label">Description</label>
             <div class="col-sm-9">
                 <textarea name="project_desc" class="form-control" id="project_create_desc" cols="30"
-                          rows="10" value="{{old('project_desc')}}"></textarea>
+                          rows="10" value="">{{old('project_desc')}}</textarea>
             </div>
         </div>
 

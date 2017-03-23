@@ -9,12 +9,13 @@ class AjaxResponse
     public $error_msg;
     public $data;
 
-    public function __construct($success = false, $error_code = 0, $error_msg = '', $data = array())
+    public function __construct($success = false, $error_code = 0, $error_msg = '', $data = array(), $messages = '')
     {
         $this->success = $success;
         $this->error_code = $error_code;
         $this->error_msg = $error_msg;
         $this->data = $data;
+        $this->messages = $messages;
     }
 
     public function toArray()
@@ -25,7 +26,8 @@ class AjaxResponse
                 'code' => $this->error_code,
                 'msg' => $this->error_msg
             ),
-            'data' => $this->data
+            'data' => $this->data,
+            'messages' => $this->messages
         );
     }
 }

@@ -1,6 +1,11 @@
 <h3>This is admin profile page</h3>
 {{$user->email}}
 <hr>
+
+<div id="messages" class="hidden alert alert-success alert-dismissible" role="alert">
+    <h5>Successfully update profile</h5>
+</div>
+
 <div class="profile_update">
     <form class="form-horizontal" id="profile_edit_form" enctype="multipart/form-data">
         {{method_field('PUT')}}

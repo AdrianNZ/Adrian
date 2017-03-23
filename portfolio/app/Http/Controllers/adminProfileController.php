@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Profile;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use App\Http\Libraries\AjaxResponse;
 
@@ -18,6 +19,7 @@ class adminProfileController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +30,7 @@ class adminProfileController extends Controller
         $user = \Auth::user();
         $rsp = new AjaxResponse();
         $list['profile'] = $user->profile()->get();
-        $data['html'] = \View::make('admin.profile.index', array('profile'=>$list['profile'], 'user'=>$user))->render();
+        $data['html'] = \View::make('admin.profile.index', array('profile' => $list['profile'], 'user' => $user))->render();
         $rsp->success = 1;
         $rsp->data = $data;
 
@@ -48,7 +50,7 @@ class adminProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -59,7 +61,7 @@ class adminProfileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -70,7 +72,7 @@ class adminProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -81,8 +83,8 @@ class adminProfileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -93,7 +95,7 @@ class adminProfileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -103,7 +105,7 @@ class adminProfileController extends Controller
 
     public function idupdate(Request $request, $id)
     {
-        $roles=[
+        $roles = [
             'description' => 'required',
             'phone' => 'required',
             'address' => 'required'
@@ -147,9 +149,9 @@ class adminProfileController extends Controller
         }
 
         $profile->save();
-
         $list['profile'] = $user->profile()->get();
-        $data['html'] = \View::make('admin.profile.index', array('profile'=>$list['profile'], 'user'=>$user))->render();
+        $data['html'] = \View::make('admin.profile.index', array('profile' => $list['profile'], 'user' => $user))->render();
+        $rsp->messages = 'Successfully update profile';
         $rsp->success = 1;
         $rsp->data = $data;
 

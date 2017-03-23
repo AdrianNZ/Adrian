@@ -9,7 +9,7 @@ use App\Slideimage;
 use Illuminate\Http\Request;
 use App\Http\Libraries\AjaxResponse;
 use Illuminate\Support\Facades\Storage;
-use Purifier;
+//use Purifier;
 use Image;
 use Validator;
 
@@ -80,7 +80,8 @@ class adminProjectController extends Controller
 
         $user = \Auth::user();
         $project->name = $request->project_name;
-        $project->description = Purifier::clean($request->project_desc);
+//        $project->description = Purifier::clean($request->project_desc);
+        $project->description = $request->project_desc;
         $project->href = $request->project_slug;
         $project->img = $request->fake_img;
 
@@ -101,8 +102,8 @@ class adminProjectController extends Controller
             foreach ($forSlides as $forSlide) {
                 $slideimage = new Slideimage();
                 $imagename = time() . '_' . $count . '.' . $forSlide->getClientOriginalExtension();
-                $location = public_path('/upload/img/projects/slide/' . $imagename);
-                Image::make($forSlide->getRealPath())->resize(540, 310)->save($location);
+                $imagelocation = public_path('/upload/img/projects/slide/' . $imagename);
+                Image::make($forSlide->getRealPath())->resize(540, 310)->save($imagelocation);
 
                 $slideimage->slug = $imagename;
                 $slideimage->description = 'Project ' . $project->id . ' for slide image';
@@ -203,14 +204,15 @@ class adminProjectController extends Controller
         $rsp = new AjaxResponse();
         $project = Project::findOrFail($id);
         $project->name = $request->project_name;
-        $project->description = Purifier::clean($request->project_desc);
+//        $project->description = Purifier::clean($request->project_desc);
+        $project->description = $request->project_desc;
         $project->href = $request->project_slug;
         $project->img = $request->fake_img;
 
         if ($request->hasFile('project_img')) {
 
             $oldFilename = $project->title_img;
-            Storage::delete('/projects/'.$oldFilename);
+            Storage::delete('/projects/' . $oldFilename);
 
             $image = $request->file('project_img');
             $filename = time() . '.' . $image->getClientOriginalExtension();
@@ -233,8 +235,8 @@ class adminProjectController extends Controller
             foreach ($forSlides as $forSlide) {
                 $slideimage = new Slideimage();
                 $imagename = time() . '_' . $count . '.' . $forSlide->getClientOriginalExtension();
-                $location = public_path('/upload/img/projects/slide/' . $imagename);
-                Image::make($forSlide->getRealPath())->resize(540, 310)->save($location);
+                $imagelocation = public_path('/upload/img/projects/slide/' . $imagename);
+                Image::make($forSlide->getRealPath())->resize(540, 310)->save($imagelocation);
 
                 $slideimage->slug = $imagename;
                 $slideimage->description = 'Project ' . $project->id . ' for slide image';
