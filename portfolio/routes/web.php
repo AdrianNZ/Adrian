@@ -18,6 +18,7 @@ Route::post('/contact', 'contactController@sendMail');
 
 Route::get('/', 'MainController@index');
 Route::get('docs/{file?}', 'Docscontroller@show');
+Route::get('docs2/{file?}', 'Docscontroller@show2');
 
 Route::group(['prefix'=>'admin', 'middleware' => 'admin'], function () {
     Route::get('', 'AdminController@index');

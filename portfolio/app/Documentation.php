@@ -23,11 +23,18 @@ class documentation extends Model
      */
     public function path($file)
     {
+        $file = ends_with($file, '.md') ? $file : $file . '.md';
         $path = base_path('docs' . DIRECTORY_SEPARATOR . $file);
 
         if (!File::exists($path)) {
             abort(404, "There is no file");
         }
         return $path;
+    }
+
+    public function etag($file)
+    {
+        $lastModified = File::lastModified($this->path($file, 'docs'));
+        return md5($file.$lastModified);
     }
 }

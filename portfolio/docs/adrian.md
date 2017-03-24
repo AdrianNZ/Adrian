@@ -1,9 +1,9 @@
 
-# INSEOP IM (ADRIAN)
-===================
+INSEOP IM (ADRIAN)
+==========
 
 
-7 Roband AVE, Glenfield, Auckland, 0629 
+7 Roband AVE, Glenfield, Auckland, 0629
 
 Phone: 021 040 9958 
 
@@ -41,18 +41,18 @@ Education
 Core Skills
 ----------
 
-#### Video Editing
->- Final cut pro
->- Premiere
+>- #### Video Editing
+>>- Final cut pro
+>>- Premiere
 
-#### Programming Language
->- HTML5, CSS3
->- JavaScript
->- VueJS
->- ReactJS
+>- #### Programming Language
+>>- HTML5, CSS3
+>>- JavaScript
+>>- VueJS
+>>- ReactJS
 
-#### Programming Framework
->- laravel 5.3 ~
+>- #### Programming Framework
+>>- laravel 5.3 ~
 
 
 
