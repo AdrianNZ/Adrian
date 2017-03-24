@@ -20,7 +20,7 @@ class Docscontroller extends Controller
 //            return markdown($this->docs->get());
 //        });
         $content = \Cache::remember('docs.{$file}', 120, function () use ($file) {
-            return markdown($this->docs->get($file ?: 'installation.md'));
+            return markdown($this->docs->get($file ?: 'hello.md'));
         });
         return view('markdown', compact('index', 'content'));
     }
