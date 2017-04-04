@@ -1,0 +1,60 @@
+body{
+  font-family: Raleway !important;
+}
+
+.action_btn {
+  top: 35%;
+}
+
+.orange{
+  background-color:rgba(237,122,38,1) !important;
+}
+
+img{
+  width:100%;
+}
+
+.user-profile{
+  margin-top: 20px;
+  color:#f48c12;
+  border-bottom:1px dashed rgba(255,255,255,0.5);
+}
+
+.outline{
+  border:1px solid #000000;
+}
+
+.navbar-toggle{
+  z-index: 2;
+}
+
+.navbar-right>li{
+  text-align: center;
+}
+
+#login-container{
+  margin-top:151px;
+
+  .login-info{
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+  }
+  .login-form{
+    background-color: lightgray;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .login-password{
+    color: #ffffff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #5e5d5d;
+  }
+
+  .glyphicon.glyphicon-user{
+    font-size:75px;
+    color:slategray;
+  }
+}

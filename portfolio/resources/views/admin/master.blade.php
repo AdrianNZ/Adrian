@@ -60,8 +60,6 @@
                         <li><a href="{{ url('/login') }}">Login</a></li>
                         <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
-                        {{--<li><a href="{{url('/task')}}">My Tasks</a></li>--}}
-                        {{--<li><a href="{{route('project.index')}}">My Project</a></li>--}}
                         <li class="dropdown">
 
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -70,8 +68,6 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                {{--<li><a href="{{url('/task')}}">My Tasks</a></li>--}}
-                                {{--<li><a href="{{route('project.index')}}">My Project</a></li>--}}
                                 <li>
                                     <a href="{{ url('/logout') }}"
                                        onclick="event.preventDefault();
