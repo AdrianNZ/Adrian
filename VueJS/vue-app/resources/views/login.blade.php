@@ -26,21 +26,22 @@
 
     @include('layouts.nav')
     <div class="row">
-        <div class="col-sm-8 col-sm-offset-2 outline">
+        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 outline">
             <div class="row login-info">
-                <div class="col-xs-7 col-sm-offset-2">
+                <div class="col-xs-6 col-xs-offset-2">
                     <h4>Member Login</h4>
                     <p>
                         <small class="">발급 받은 아이디와 패스워드를 입력해주세요</small>
                     </p>
                 </div>
-                <div class="col-xs-2">
+                <div class="col-xs-1 col-xs-offset-1">
                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                 </div>
             </div>
             <div class="clearfix"></div>
             <div class="row login-form">
-                <form class="form-horizontal" method="post" action="/login" @submit.prevent="onSubmit" @keydown="errors.clear($event.target.name)">
+                <form class="form-horizontal" method="post" action="/login" @submit.prevent="onSubmit"
+                      @keydown="errors.clear($event.target.name)">
                     {{csrf_field()}}
                     <div class="form-group">
                         <label for="inputEmail" class="col-xs-3 control-label text-right">Email</label>
@@ -50,7 +51,8 @@
                         </div>
                         <br>
                         {{--error control--}}
-                        <span class="col-xs-offset-3 col-xs-9 text-danger" v-if="errors.has('email')" v-text="errors.get('email')"></span>
+                        <span class="col-xs-offset-3 col-xs-9 text-danger" v-if="errors.has('email')"
+                              v-text="errors.get('email')"></span>
                     </div>
 
                     <div class="form-group">
@@ -61,11 +63,12 @@
                         </div>
                         <br>
                         {{--error control--}}
-                        <span class="col-xs-offset-3 col-xs-9 text-danger" v-if="errors.has('password')" v-text="errors.get('password')"></span>
+                        <span class="col-xs-offset-3 col-xs-9 text-danger" v-if="errors.has('password')"
+                              v-text="errors.get('password')"></span>
                     </div>
 
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-9">
+                        <div class="col-xs-offset-2 col-xs-9">
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox"> 내 아이디 기억하기
@@ -73,9 +76,11 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-9">
-                            <button type="submit" class="btn btn-primary btn-block" :disabled="errors.any()">로그인 하기</button>
+                        <div class="col-xs-offset-2 col-xs-9">
+                            <button type="submit" class="btn btn-primary btn-block" :disabled="errors.any()">로그인 하기
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -89,8 +94,7 @@
         </div>
     </div>
 </div>
-{{--<script src="/js/app.js"></script>--}}
-{{--<script src="/js/master.js"></script>--}}
+
 <script src="/js/login.js"></script>
 </body>
 </html>

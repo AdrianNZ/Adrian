@@ -1,4 +1,4 @@
-body{
+body {
   font-family: Raleway !important;
 }
 
@@ -6,55 +6,55 @@ body{
   top: 35%;
 }
 
-.orange{
-  background-color:rgba(237,122,38,1) !important;
+.orange {
+  background-color: rgba(237, 122, 38, 1) !important;
 }
 
-img{
-  width:100%;
+img {
+  width: 100%;
 }
 
-.user-profile{
+.user-profile {
   margin-top: 20px;
-  color:#f48c12;
-  border-bottom:1px dashed rgba(255,255,255,0.5);
+  color: #f48c12;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
 }
 
-.outline{
-  border:1px solid #000000;
+.outline {
+  border: 1px solid #000000;
 }
 
-.navbar-toggle{
+.navbar-toggle {
   z-index: 2;
 }
 
-.navbar-right>li{
+.navbar-right > li {
   text-align: center;
 }
 
-#login-container{
-  margin-top:151px;
+#login-container {
+  margin-top: 151px;
 
-  .login-info{
+  .login-info {
     padding-top: 10px;
     padding-bottom: 10px;
 
   }
-  .login-form{
+  .login-form {
     background-color: lightgray;
     padding-top: 10px;
     padding-bottom: 10px;
   }
 
-  .login-password{
+  .login-password {
     color: #ffffff;
     padding-top: 10px;
     padding-bottom: 10px;
     background-color: #5e5d5d;
   }
 
-  .glyphicon.glyphicon-user{
-    font-size:75px;
-    color:slategray;
+  .glyphicon.glyphicon-user {
+    font-size: 75px;
+    color: slategray;
   }
 }
