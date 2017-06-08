@@ -16,17 +16,11 @@
     import MenuItem from './menu/MenuItem.vue';
     import TabItem from './menu/MenuTab.vue'
 
-
-    import Inbox from './contents/inbox.vue';
-//    import NextWeek from './contents/NextWeek.vue';
-//    import Today from './contents/Today.vue';
-
-
     var dataMenu = [
-        {id: 1, title: "Inbox"},
-        {id: 2, title: "Today"},
-        {id: 3, title: "Next Week"},
-        {id: 4, title: "Next Month"}
+        {id: 1, title: "Inbox", href:"inbox", to:"ContentInbox"},
+        {id: 2, title: "Today", href:"today",to:"ContentInbox"},
+        {id: 3, title: "Next Week", href:'nextweek',to:"ContentInbox"},
+        {id: 4, title: "Next Month", href:'nextmonth',to:"ContentInbox"}
     ];
 
     export default{

@@ -10,7 +10,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Brand</a>
+                    <router-link to="/" class="navbar-brand" >Home</router-link>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -26,11 +26,11 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
+                                <router-link tag="li" to="/login" exact><a>Log IN</a></router-link>
+                                <router-link tag="li" to="/signup" exact><a>Sign UP</a></router-link>
+                                <router-link tag="li" to="/userinfo" exact><a>Information</a></router-link>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
+                                <li @click="logout()"><a>Log Out</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -44,6 +44,11 @@
     export default{
         data: function () {
             return {}
+        },
+        methods:{
+            logout(){
+
+            }
         }
     }
 </script>

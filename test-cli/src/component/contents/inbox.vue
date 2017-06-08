@@ -54,7 +54,7 @@
         {id: 1, title: '테스트 일정', date: '2017-04-01', type: 'inbox'},
         {id: 2, title: '테스트 일정2', date: '2017-04-05', type: 'inbox'},
         {id: 3, title: '테스트 일정3', date: '2017-04-10', type: 'inbox'},
-        {id: 4, title: '테스트 일정4', date: '2017-04-15', type: 'inbox'},
+        {id: 4, title: '테스트 일정4', date: '2017-04-15', type: 'inbox'}
     ];
 
     export default{
@@ -96,6 +96,7 @@
             },
             editTodo(id){
                 this.addMode = true;
+                this.todoList[id] = this.todo;
                 this.reset();
             },
             editCancel(){

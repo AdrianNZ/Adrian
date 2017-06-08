@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <app-header></app-header>
-    <app-menu></app-menu>
-    <app-content></app-content>
+    <router-view name="Header"></router-view>
+    <router-view name="Menu"></router-view>
+    <router-view></router-view>
   </div>
 </template>
 
