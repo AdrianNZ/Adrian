@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Generated files" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/dist/test-cli/src/main.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/dist/test-cli/src/api/index.js" />
+      <root url="file://$PROJECT_DIR$/dist/test-cli/src/api/resource.js" />
+      <root url="file://$PROJECT_DIR$/dist/test-cli/src/package/auth/auth.js" />
+      <root url="file://$PROJECT_DIR$/dist/test-cli/src/main.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>
