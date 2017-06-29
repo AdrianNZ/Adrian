@@ -6,20 +6,21 @@
 
         <div id="inbox-form">
             <div class="form-group col-sm-3 col-md-3 col-ls-3">
-                <input type="text" class="form-control input-sm" placeholder="일정" v-model="todo.title">
+                <input type="text" class="form-control input-sm" placeholder="일정"
+                v-model="todoTitle">
             </div>
 
             <div class="form-group col-sm-3 col-md-3 col-ls-3">
-                <input type="date" class="form-control input-sm" v-model="todo.date">
+                <input type="date" class="form-control input-sm" v-model="todoDate">
             </div>
 
             <div class="form-group col-sm-3 col-md-3 col-ls-3">
-                <input type="text" class="form-control input-sm" placeholder="타입" v-model="todo.type">
+                <input type="text" class="form-control input-sm" placeholder="타입" v-model="todoType">
             </div>
 
             <div class="form-group col-sm-3 col-md-3 col-ls-3">
                 <button class="btn btn-primary btn-sm" @click="addTodo()" v-if="addMode">일정추가</button>
-                <button class="btn btn-info btn-sm" @click="updateTodo(todo.id)" v-if="!addMode">일정수정</button>
+                <button class="btn btn-info btn-sm" @click="updateTodo()" v-if="!addMode">일정수정</button>
                 <button class="btn btn-danger btn-sm" @click="editCancel()" v-if="!addMode">취소</button>
             </div>
         </div>
@@ -29,15 +30,15 @@
                 <caption>일정</caption>
 
                 <tbody>
-                <tr v-for="data in todoList">
+                <tr v-for="item in todoList">
                     <td><input type="checkbox"></td>
-                    <td>{{data.title}}</td>
-                    <td>{{data.date}}</td>
-                    <td>{{data.type}}</td>
+                    <td>{{item.title}}</td>
+                    <td>{{item.date}}</td>
+                    <td>{{item.type}}</td>
                     <td>
-                        <button class="btn btn-success btn-xs" @click="clicked(data.id)"><span
+                        <button class="btn btn-success btn-xs" @click="clicked(item.id)"><span
                                 class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
-                        <button class="btn btn-danger btn-xs" @click="deleteTodo(data.id)"><span
+                        <button class="btn btn-danger btn-xs" @click="deleteTodo(item.id)"><span
                                 class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
                     </td>
                 </tr>
@@ -50,102 +51,78 @@
 
 <script>
 
-    import api from '../../api'
+    import {mapGetters} from 'vuex'
 
     export default{
         data: function () {
             return {
-                todo: {
-                    id: '',
-                    title: '',
-                    date: '',
-                    type: ''
-                },
-
-                todoList: [],
                 addMode: true
             }
         },
+
         methods: {
-            reset(){
-                this.todo = {
-                    id: '',
-                    title: '',
-                    date: '',
-                    type: ''
-                }
-            },
-
-            kick(arr, val){
-                for (let i = 0; i < arr.length; i++) {
-                    if (arr[i].id == val) {
-                        return arr = arr.splice(i, 1);
-                    }
-                }
-            },
-
-            findIndex(arr, val){
-                for (let i = 0; i < arr.length; i++) {
-                    if (arr[i].id == val) {
-                        return arr.indexOf(arr[i]);
-                    }
-                }
-            },
-
-            clicked(id) {
+            clicked(targetId) {
                 this.addMode = false;
-
-                for (let i = 0; i < this.todoList.length; i++) {
-                    if (this.todoList[i].id === id) {
-                        return this.todo = this.todoList[i];
-                    }
-                }
+                let targetVal =  this.$store.getters.todoList.find(element=>element.id == targetId);
+                this.$store.commit('SET_TODO', targetVal);
             },
 
             addTodo(){
-                api.addTodo(this.todo).then(response => {
-                    if (response.body.success) {
-                        this.todoList.push(response.body.data);
-                        this.reset();
-                    }
-                });
+                const newTodo = this.$store.getters.todo;
+                this.$store.dispatch('saveTodo', newTodo);
             },
 
-            updateTodo(frontId){
-                api.updateTodo(this.todo, frontId).then(response => {
-                    if (response.body.success) {
-                        this.addMode = true;
-                        let index = this.findIndex(this.todoList, response.body.data.id);
-                        this.todoList[index] = response.body.data;
-                        alert('Updated Completed');
-                        this.reset();
-                    }
-                });
+            updateTodo(){
+                let data = this.$store.getters.todo;
+                this.$store.dispatch('updateTodo', data);
             },
 
             editCancel(){
                 this.addMode = true;
-                this.reset();
+                this.$store.commit('RESET_TODO');
             },
 
             deleteTodo(id){
                 let result = confirm('Are you sure?');
                 if (result) {
-                    api.deleteTodo(id).then(response => {
-                        this.kick(this.todoList, response.body.data);
-                    });
+                    this.$store.dispatch('deleteTodo', id);
                 }
-            }
-        },
-        created(){
-            api.getTodo().then(response => {
-                if (response.body.success) {
-                    console.log('go?');
-                    this.todoList = response.body.data;
-                }
-            })
+            },
         },
 
+        created(){
+            this.$store.dispatch('loadData');
+        },
+
+        computed:{
+            ...mapGetters({
+                todoList:'todoList'
+            }),
+            todoTitle : {
+                get(){
+                    return this.$store.getters.todo.title
+                },
+                set(value){
+                    this.$store.commit('UPDATE_TODO_TITLE', value)
+                }
+            },
+            todoDate:{
+                get(){
+                    return this.$store.getters.todo.date
+                },
+                set(value){
+                    this.$store.commit('UPDATE_TODO_DATE', value)
+                }
+            },
+            todoType:{
+                get(){
+                    return this.$store.getters.todo.type
+                },
+                set(value){
+                    this.$store.commit('UPDATE_TODO_TYPE', value)
+                }
+            }
+        }
     }
 </script>
 

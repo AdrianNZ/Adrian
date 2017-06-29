@@ -41,17 +41,5 @@ export default({
     logout: function () {
         Vue.auth.destroyToken();
         window.location.pathname = '/';
-    },
-    getTodo: function () {
-        return Vue.http.get('todo');
-    },
-    addTodo: function (data) {
-        return Vue.http.post('todo', data);
-    },
-    deleteTodo: function (id) {
-        return Vue.http.get('deleteTodo/' + id);
-    },
-    updateTodo: function (data, id) {
-        return Vue.http.post('updateTodo/' + id, data);
     }
 })
