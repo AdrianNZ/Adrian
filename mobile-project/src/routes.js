@@ -14,19 +14,32 @@ import Footer from './assets/components/Footer.vue'
 export const routes = [
     {path: '*', redirect: '/'},
     {path: '/login', name: 'Login', component: Login},
-    {path: '/config', name:'Config', component: Config, meta:{title:'환경설정'}},
 
 
-    {
-        path: '/', components: {
+    {path: '/', components: {
         default: Home,
         'header': Header,
         'footer': Footer,
-    }, children: [
-        {path: '', component: Home},
-        {path: 'list', component: List, name:'List', meta:{title:'쿠키줍기'}},
-        {path: 'heart', component: Heart, name:'Heart', meta:{title:'하트받기'}},
-    ]
+    }},
+
+    {path: '/list', components: {
+        default: List,
+        'header': Header,
+        'footer': Footer,
     },
+    meta:{title:'쿠키줍기'}},
+
+    {path: '/heart', components: {
+        default: Heart,
+        'header': Header,
+        'footer': Footer,
+    },
+    meta:{title:'하트받기'}},
+
+    {path: '/config', components: {
+        default: Config,
+        'footer': Footer,
+    },
+        meta:{title:'환경설정'}},
 
 ];
