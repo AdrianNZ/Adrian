@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>Adrian's Sample Page</title>
+    <!-- Bootstrap -->
+    <link href="js/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- user css -->
+    <link rel="stylesheet" href="css/master.css" media="screen" title="no title" charset="utf-8">
+  </head>
+
+  <body>
+    <div class="container" style="padding-top:30px;">
+
+
+      <h3>9자 카드는 여기서 선택</h3>
+      <img src="9.jpg" alt="" style="width:50px;height:50px;">
+
+      <div class="form-group">
+        <label class="radio-inline">
+          <input type="radio" name="nineValue" id="inlineRadio1" value="ggut"> 열끗으로
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="nineValue" id="inlineRadio2" value="ppea"> 쌍피로
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label for="gwang">광</label>
+        <input type="text" class="form-control" id="gwang" placeholder="광">
+        <input type="checkbox" id="bee"> 비광여부
+      </div>
+
+      <div class="form-group">
+        <label for="ggut">열끗</label>
+        <input type="text" class="form-control" id="ggut" placeholder="열끗">
+        <input type="checkbox" id="godori"> 고도리여부
+      </div>
+
+      <div class="form-group">
+        <label for="ttea">띠</label>
+        <input type="text" class="form-control" id="ttea" placeholder="띠">
+        <input type="checkbox" id="cho"> 초단여부
+        <input type="checkbox" id="hong"> 홍단여부
+        <input type="checkbox" id="chung"> 청단여부
+      </div>
+
+      <div class="form-group">
+        <label for="ppea">피(쌍피를 제외한 갯수)</label>
+        <input type="text" class="form-control" id="ppea" placeholder="피">
+
+        <label class="checkbox-inline">
+          <img src="11.png" alt="" style="width:50px;height:50px;">
+          <input type="checkbox" id="doublePpea1" value="option1"> 쌍피1
+        </label>
+        <label class="checkbox-inline">
+          <img src="12.gif" alt="" style="width:50px;height:50px;">
+          <input type="checkbox" id="doublePpea2" value="option2"> 쌍피2
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label for="go">고</label>
+        <input type="text" class="form-control" id="go" placeholder="고">
+      </div>
+
+      <hr>
+
+      <div class="form-group">
+        <label class="checkbox-inline">
+          <input type="checkbox" id="lackofGwang" value="option1"> 광박
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" id="lackofGgut" value="option2"> 멍박
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" id="lackofPpea" value="option3"> 피박
+        </label>
+      </div>
+
+      <button class="btn btn-default" onclick="go()">점수계산</button>
+    </div>
+  </body>
+
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="js/jQuery-1.12.4/jquery-1.12.4.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+  <!-- user javascript -->
+  <script src="js/app.js"></script>
+
+</html>
