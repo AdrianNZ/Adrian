@@ -12,7 +12,7 @@
                             </v-card-title>
                         </v-flex>
                         <v-flex xs1 class="text-xs-center">
-                            <!--노티피케이션 종-->
+                            <!--노티피케이션 벨-->
                             <v-card-actions style="padding-top: 16px">
                                 <v-btn icon>
                                     <div v-if="notification==true" class="notification--box"></div>
@@ -27,6 +27,15 @@
         <v-divider></v-divider>
         <!--우선 설정된 사용자들 모아서 보여주는 컴퍼넌트-->
         <!--###추후 carousel로 변경 요망-->
+        <!--<template>-->
+            <!--<v-carousel hide-controls leftControlIcon="false" rightControlIcon="false" style="height:auto" interval="1000">-->
+                <!--<v-carousel-item>-->
+                    <!--<app-priority-component class="mt-3 mb-3 pl-4 pr-3"></app-priority-component>-->
+                    <!--<app-priority-component class="mt-3 mb-3 pl-4 pr-3"></app-priority-component>-->
+                    <!--<app-priority-component class="mt-3 mb-3 pl-4 pr-3"></app-priority-component>-->
+                <!--</v-carousel-item>-->
+            <!--</v-carousel>-->
+        <!--</template>-->
         <app-priority-component class="mt-3 mb-3 pl-4 pr-3"></app-priority-component>
         <!--컴퍼넌트 종료-->
         <!--회색 Border-->
@@ -41,22 +50,17 @@
             <v-layout row>
                 <v-flex xs4>
                     <v-btn flat block>
-                        <v-icon>format_list_bulleted
-                        </v-icon>
-                        <small>전체</small>
+                        <img class="btn--small" src="../../src/assets/icon/ic-list-all.svg">
                     </v-btn>
                 </v-flex>
                 <v-flex xs4>
                     <v-btn flat block>
-                        <v-icon>grid_on</v-icon>
-                        <small>라이크필요</small>
+                        <img class="btn--small" src="../../src/assets/icon/ic-like-list.svg">
                     </v-btn>
                 </v-flex>
                 <v-flex xs4>
                     <v-btn flat block>
-                        <v-icon>bookmark_border
-                        </v-icon>
-                        <small>팔로우필요</small>
+                        <img class="btn--small" src="../../src/assets/icon/ic-follower-list.svg">
                     </v-btn>
                 </v-flex>
             </v-layout>
